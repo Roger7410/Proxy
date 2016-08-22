@@ -1,0 +1,16 @@
+[03/09/15 21:37:00 <module> ./bild.py:15 bilder.py:124] platform=darwin
+[03/09/15 21:37:00 <module> ./bild.py:15 bilder.py:125] jdk={'1.6': '/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Home', '1.7': '/Library/Java/JavaVirtualMachines/jdk1.7.0_67.jdk/Contents/Home', '1.8': '/Library/Java/JavaVirtualMachines/jdk1.8.0_20.jdk/Contents/Home'}
+[03/09/15 21:37:00] require compile
+[03/09/15 21:37:00 require ./bild.py:22 bilder.py:422] require compile
+[03/09/15 21:37:00 javac ./bild.py:18 bilder.py:503] 1.7.0_67
+[03/09/15 21:37:00 javac ./bild.py:18 bilder.py:511] javac -d /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/out -cp /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/out:/Users/JOKER/.bild/jars/* /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/src/cs601/proxy/EchoHttpServer.java /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/src/cs601/proxy/ClientHandler.java /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/src/cs601/proxy/ProxyServer.java
+[03/09/15 21:37:00 javac ./bild.py:18 bilder.py:511] Note: /Users/JOKER/Courses/cs601/projects/Roger7410-proxy-new/src/cs601/proxy/EchoHttpServer.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+[03/09/15 21:37:00] build launch_proxy
+[03/09/15 21:37:00 require ./bild.py:22 bilder.py:430] build launch_proxy
+[03/09/15 21:37:00 wget ./bild.py:31 bilder.py:713] wget -r --wait=0 --keep-session-cookies -q -P /tmp/wo --proxy=off --level 1 http://www.cs.usfca.edu/index.html
+[03/09/15 21:37:02 wget ./bild.py:32 bilder.py:713] wget -r --wait=0 --keep-session-cookies -q -P /tmp/w --proxy=on --level 1 http://www.cs.usfca.edu/index.html
+[03/09/15 21:37:04 diff ./bild.py:33 bilder.py:726] diff -r /tmp/wo /tmp/w
+[03/09/15 21:37:04 wget ./bild.py:31 bilder.py:713] wget -r --wait=0 --keep-session-cookies -q -P /tmp/wo --proxy=off --level 1 http://www.github.com
+[03/09/15 21:37:05 wget ./bild.py:32 bilder.py:713] wget -r --wait=0 --keep-session-cookies -q -P /tmp/w --proxy=on --level 1 http://www.github.com
+[03/09/15 21:37:06 diff ./bild.py:33 bilder.py:726] diff -r /tmp/wo /tmp/w
