@@ -8,7 +8,7 @@ import java.util.Map;
 public class ClientHandler implements Runnable {
 
 	public static final int HTTP = 80;
-	protected boolean debug = false;   //debug
+	//protected boolean debug = true;
     String method;
     String file;
     String HTTPversion;
@@ -32,9 +32,7 @@ public class ClientHandler implements Runnable {
                 forwardRemoteDataToBrowser();
             }
         } catch (IOException e) {
-            if(debug) {
-                e.printStackTrace();
-            }
+            e.printStackTrace();
         } finally {
             try{
                 if(browserIS!=null){
@@ -55,10 +53,8 @@ public class ClientHandler implements Runnable {
                 if(proxySocket!=null){
                     proxySocket.close();
                 }
-            }catch (IOException e) {
-                if (debug) {
-                    e.printStackTrace();
-                }
+            }catch (IOException e){
+                e.printStackTrace();
             }
         }
     }
@@ -149,41 +145,28 @@ public class ClientHandler implements Runnable {
         return headers;
     }
 
-    public void openUpstreamSocket(String host){
-        try{
+    public void openUpstreamSocket(String host) throws IOException{
             proxySocket = new Socket(host,HTTP);
             proxyIS = proxySocket.getInputStream();
             proxyOS = proxySocket.getOutputStream();
-        }catch (IOException e){
-            if (debug){
-                e.printStackTrace();
-            }
-        }
-
     }
 
-    public void makeUpstreamRequest(Map<String,String> headers) {
-        try {
-            String request = method + " " + file + " " + "HTTP/1.0\r\n";
-            request = request + writeHeaders(headers);
+    public void makeUpstreamRequest(Map<String,String> headers) throws IOException,NullPointerException{
+        String request = method+" "+file+" "+"HTTP/1.0\r\n";
+        request = request + writeHeaders(headers);
+        request+="\r\n";
+        if( method.equals("POST") ){
+            int len = Integer.parseInt(headers.get("content-length").replace("\r\n", ""));
+            StringBuilder postData = new StringBuilder();
+            for(int i=0; i<len; i++){
+                postData.append((char)browserIS.read());
+            }
+            request += postData.toString();
             request += "\r\n";
-            if (method.equals("POST")) {
-                int len = Integer.parseInt(headers.get("content-length").replace("\r\n", ""));
-                StringBuilder postData = new StringBuilder();
-                for (int i = 0; i < len; i++) {
-                    postData.append((char) browserIS.read());
-                }
-                request += postData.toString();
-                request += "\r\n";
-                request += "\r\n";
-            }
-            proxyOS.write(request.getBytes());
-            proxyOS.flush();
-        }catch(IOException e){
-            if(debug){
-                e.printStackTrace();
-            }
+            request += "\r\n";
         }
+        proxyOS.write(request.getBytes());
+        proxyOS.flush();
     }
 
     public String writeHeaders(Map<String,String> headers){

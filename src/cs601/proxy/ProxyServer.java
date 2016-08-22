@@ -8,7 +8,6 @@ public class ProxyServer {
 	public static final boolean SingleThreaded = false;
     public static final int proxyPort = 8080;
 	public static void main(String[] args) throws IOException {
-
         ServerSocket proxyServer = new ServerSocket(proxyPort);
         while (true){
             Socket browserSocket = proxyServer.accept();
